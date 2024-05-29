@@ -12,7 +12,7 @@ export default component$(() => {
           <nav class="flex space-x-4">
             <Link class="btn btn-outline btn-sm" href="/register">Register</Link>
             <Link class="btn btn-outline btn-sm" href="/login">Login</Link>
-            <Link class="btn btn-outline btn-sm" href="/profile">Profile</Link>
+            <Link class="btn btn-outline btn-sm" href="/users">Users</Link>
           </nav>
         </div>
       </header>
