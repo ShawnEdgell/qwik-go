@@ -64,8 +64,8 @@ func main() {
 
 	connectDatabase()
 
-	router.POST("/register", register)
-	router.POST("/login", login)
+	router.POST("/api/register", register)
+	router.POST("/api/login", login)
 
 	protected := router.Group("/api")
 	protected.Use(authMiddleware())
@@ -114,6 +114,11 @@ func register(c *gin.Context) {
 	var newUser User
 	if err := c.ShouldBindJSON(&newUser); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid input"})
+		return
+	}
+
+	if newUser.Name == "" || newUser.Email == "" || newUser.Password == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "All fields are required"})
 		return
 	}
 

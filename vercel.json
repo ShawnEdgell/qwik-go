@@ -1,0 +1,22 @@
+{
+    "version": 2,
+    "name": "qwik-go",
+    "builds": [
+      {
+        "src": "frontend/package.json",
+        "use": "@vercel/static-build",
+        "config": {
+          "distDir": "frontend/dist"
+        }
+      },
+      {
+        "src": "backend/main.go",
+        "use": "@vercel/go"
+      }
+    ],
+    "routes": [
+      { "src": "/api/(.*)", "dest": "/backend/main.go" },
+      { "src": "/(.*)", "dest": "/frontend/dist/$1" }
+    ]
+  }
+  
