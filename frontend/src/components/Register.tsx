@@ -6,6 +6,11 @@ export const Register = component$(() => {
     const navigate = useNavigate();
 
     const registerUser = $(async () => {
+        if (!state.name || !state.email || !state.password) {
+            state.message = 'All fields are required';
+            return;
+        }
+
         const response = await fetch('http://localhost:8080/register', {
             method: 'POST',
             headers: {
@@ -51,12 +56,17 @@ export const Register = component$(() => {
           value={state.password}
           onInput$={(e) => (state.password = (e.target as HTMLInputElement).value)}
         />
-        <button class="btn btn-primary w-full mb-4" onClick$={registerUser}>Register</button>
-        <p class="text-red-500">{state.message}</p>
-        <p class="text-sm">
-          Already have an account? <Link class="link" href="/login">Login</Link>
+        <button
+          class="btn btn-primary w-full"
+          onClick$={registerUser}
+        >
+          Register
+        </button>
+        <p class="mt-4 text-center">
+          Already have an account? <Link href="/login" class="text-blue-500">Log in</Link>
         </p>
+        {state.message && <p class="mt-4 text-red-500">{state.message}</p>}
       </div>
     </div>
-    );
+  );
 });
